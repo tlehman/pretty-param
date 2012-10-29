@@ -15,7 +15,13 @@ module PrettyParam
 		# Takes 1 or more symbols and stores them in class.pretty_params,
 		# and then overrides to_param
 		def has_pretty_param(*fields)			
-			define_singleton_method :pretty_params, -> { fields }
+      if RUBY_VERSION < "1.9.3"
+        singleton = class << self; self; end
+        singleton.send :define_method, :pretty_params, lambda { fields }
+      else
+        define_singleton_method :pretty_params, -> { fields }
+      end
+
 			define_method :to_param do
 				PrettyParam.escape("#{self.id}-#{self.class.pretty_params.map{|a| self.send(a.to_sym) }.join('-')}")
 			end
