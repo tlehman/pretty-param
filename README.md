@@ -1,6 +1,8 @@
 Pretty Param
 ============
 
+NOTE: This fork of [@kaiuhl](http://github.com/kaiuhl)'s pretty-param gem is adapted so that it will work in old Rubies.
+
 Easily make your resource-based routes more search engine friendly without doing a bunch of crazy shit or changing your routes.
 
 Installation
